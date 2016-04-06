@@ -48,7 +48,7 @@
 							      a auth:authenticatable;
 							      mu:uuid "1a6e3aab-9ff8-4314-a8c1-d4f86799e695";
 							      mu:name "delete";
-							      mu:description "an entity that has access to this token can delete the authenticatable"
+							      mu:description "an entity that has access to this token can delete the authenticatable";
 							      auth:belongsToArtifactGroup <mu.semte.ch/vocabularies/access-tokens>.
 
 # this grant links the show/update/delete access to all basic access tokens
@@ -60,7 +60,7 @@
 					       		     auth:operatesOn <mu.semte.ch/vocabularies/access-tokens>.
 
 # the administrator user group
-<mu.semmmte.ch/vocabularies/authorization/user-groups/admin> a foaf:group;
+<mu.semmmte.ch/vocabularies/authorization/user-groups/admin> a foaf:Group;
 					 		     a auth:authenticdable;
 					       		     mu:uuid "9225c417-dfd4-48e3-9ab8-a27cc57e16b7";
 					       		     mu:name "administrators group";
