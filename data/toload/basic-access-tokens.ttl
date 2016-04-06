@@ -59,6 +59,7 @@
 
 # the administrator user group
 <mu.semmmte.ch/vocabularies/user-groups/admin> a foaf:group;
+					       a auth:authenticdable
 					       mu:uuid "9225c417-dfd4-48e3-9ab8-a27cc57e16b7";
 					       mu:name "administrators group";
 					       auth:hasRight <mu.semte.ch/vocabularies/access-tokens-grant>.

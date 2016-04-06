@@ -31,3 +31,8 @@ The authorization model constists of the following entities:
 <td>A grant represents a link between on one hand one or more access tokens an on the other hand one or more authenticadables.</td>
 <td><ul><li>[1] uuid mu:uuid</li><li>[*] accessToken auth:hasToken</li><li>[*] authenticadable auth:operatesOn</li></ul></td></tr>
 </table>
+
+# adding mu-authorization to a mu-semtech project
+## data
+To work mu-authorization will expect certain basic triples to be present in the triple store. You can add/alter them manually or you can include the turtle file that you find in /data/toLoad/basic-access-tokens.ttl.
+This turtle file defines the 4 basic access tokens types (show, update, create, delete), a group of basic access tokens, a grant that allows show/update/create rights on that group and an administrator user group that has these rights. The administrator group itself is also an authenticdable but there are no rights defined on this group.
