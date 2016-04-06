@@ -6,7 +6,7 @@
 ;;        has relations to user groups
 ;;        has access-tokens which give it rights to resources
 (define-resource user ()
-  :class (s-prefix "foaf:person")
+  :class (s-prefix "foaf:Person")
   :resource-base (s-url "http://mu.semte.ch/vocabularies/user/")
   :properties `((:name :string ,(s-prefix "mu:name")))
   :has-many `((grant :via ,(s-prefix "auth:hasRight")
@@ -20,7 +20,7 @@
 ;;              can contain users
 ;;              has authorization types on objects
 (define-resource user-group ()
-  :class (s-prefix "foaf:group")
+  :class (s-prefix "foaf:Group")
   :resource-base (s-url "http://mu.semte.ch/vocabularies/group/")
   :properties `((:name :string ,(s-prefix "mu:name")))
   :has-many `((user :via ,(s-prefix "auth:belongsToActorGroup")
