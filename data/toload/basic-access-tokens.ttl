@@ -1,0 +1,64 @@
+# this turtle file contains the basic access token definitions
+# that a mu-semtech project willing to utilize mu-authorization
+# will need to have
+
+# all tokens are defined to be authenticadable which prevents non-
+# authorized users from editing them.
+
+# this file also defines an admin user group
+# all users that are part of this group will be able to edit
+# the access tokens
+
+# prefixes
+@prefix auth: <http://mu.semte.ch/vocabularies/authorization/> .
+@prefix mu: <http://mu.semte.ch/vocabularies/core/> .
+
+# the collection of basic access tokens
+<mu.semte.ch/vocabularies/access-tokens> a auth:authenticdable;
+					 mu:uuid "5b787462-95ee-46fd-a841-4bc28dfa1c71".
+
+# show
+<mu.semte.ch/vocabularies/access-tokens/show> a auth:accessToken;
+					      a auth:authenticadable;
+					      mu:uuid "9bc6e689-a7d1-4c7e-90d2-ecb433aa3461";
+					      mu:name "show";
+					      mu:description "an entity that has access to this token will be able to request the triples connected to the authenticadables to which it grants access";
+					      auth:belongsToArtifactGroup <mu.semte.ch/vocabularies/access-tokens>.
+
+# update
+<mu.semte.ch/vocabularies/access-tokens/update> a auth:accessToken;
+					        a auth:authenticadable;
+						mu:uuid "d631ee4a-29a3-419e-a441-f96126df173d";
+					        mu:name "update";
+					        mu:description "an entity that has access to this token will be able to update the authenticadable"
+						authh:belongsToArtifactGroup <mu.semte.ch/vocabularies/access-tokens>.
+
+# create
+<mu.semte.ch/vocabularies/access-tokens/create> a auth:accessToken;
+					        a auth:authenticadable;
+						mu:uuid "fd69b852-d35a-4ca6-9273-d584ab0ea5ff";
+					        mu:name "create";
+					        mu:description "an entity that has access to this token will be able to create types that are part of a group (this group has to be authenticadable as well"
+						authh:belongsToArtifactGroup <mu.semte.ch/vocabularies/access-tokens>.
+
+# delete
+<mu.semte.ch/vocabularies/access-tokens/delete> a auth:accessToken;
+						a auth:authenticadable;
+						mu:uuid "1a6e3aab-9ff8-4314-a8c1-d4f86799e695";
+						mu:name "delete";
+						mu:description "an entity that has access to this token can delete the authenticadable"
+						authh:belongsToArtifactGroup <mu.semte.ch/vocabularies/access-tokens>.
+
+# this grant links the show/update/delete access to all basic access tokens
+<mu.semte.ch/vocabularies/access-tokens-grant> a auth:grant;
+					       mu:uuid "1a1aa084-4052-44f6-bec6-308a9f9c4fa9";
+					       auth:hasToken <mu.semte.ch/vocabularies/access-tokens/show>;
+					       auth:hasToken <mu.semte.ch/vocabularies/access-tokens/update>;
+					       auth:hasToken <mu.semte.ch/vocabularies/access-tokens/create>;
+					       auth:operatesOn <mu.semte.ch/vocabularies/access-tokens>.
+
+# the administrator user group
+<mu.semmmte.ch/vocabularies/user-groups/admin> a foaf:group;
+					       mu:uuid "9225c417-dfd4-48e3-9ab8-a27cc57e16b7";
+					       mu:name "administrators group";
+					       auth:hasRight <mu.semte.ch/vocabularies/access-tokens-grant>.
