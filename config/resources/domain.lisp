@@ -35,15 +35,15 @@
 			       :as "grants"))
   :on-path "user-groups")
 
-;; authenticadable
-;; an authenticadable is something on which rights can be given to either users
+;; authenticatable
+;; an authenticatable is something on which rights can be given to either users
 ;; or user groups, it has a name and a uuid
 
-(define-resource authenticadable ()
-  :class (s-prefix "auth:authenticadable")
-  :resource-base (s-url "http://mu.semte.ch/vocabularies/authorization/authenticadable/")
+(define-resource authenticatable ()
+  :class (s-prefix "auth:authenticatable")
+  :resource-base (s-url "http://mu.semte.ch/vocabularies/authorization/authenticatable/")
   :properties `((:name :string, (s-prefix "mu:name")))
-  :on-path "authenticadables")
+  :on-path "authenticatables")
 
 ;; access-token
 ;; describes a certain type of access token
@@ -63,12 +63,12 @@
 ;; a grant is used to determine whether or not a user can
 ;; access a certain resource.
 ;; It is an instance of an access token definition and thus maps
-;; to exactly 1 authenticadable
+;; to exactly 1 authenticatable
 (define-resource grant ()
   :class (s-prefix "auth:grant")
   :resource-base (s-url "http:/mu.semte.ch/vocabularies/authoriation/grant/")
   :has-many `((access-token :via, (s-prefix "auth:hasToken")
 			    :as "access-tokens")
-	      (authenticadable :via, (s-prefix "auth:operatesOn")
-				:as "authenticadables"))
+	      (authenticatable :via, (s-prefix "auth:operatesOn")
+				:as "authenticatables"))
   :on-path "grants")
