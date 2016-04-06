@@ -22,9 +22,9 @@ The authorization model constists of the following entities:
 <li>[*] user inverse auth:belongsToAccessGroup</li>
 <li>[*] subgroup inverse auth:belongsToGroup</li>
 <li>[*] parentgroup auth:belongsToGroup</li><li>[*] grant auth:hasRight</li></td></tr>
-<tr><td>authenticadable</td>
-<td>An authenticadable represents an object or a collection of objects on which a user can (himself or through rights granted by a group to which he belongs) have access rights. An authenticadable can belong to another authenticadable.</td>
-<td>auth:authenticadable</td>
+<tr><td>authenticatable</td>
+<td>An authenticatable represents an object or a collection of objects on which a user can (himself or through rights granted by a group to which he belongs) have access rights. An authenticatable can belong to another authenticatable.</td>
+<td>auth:authenticatable</td>
 <td><ul><li>[1] uuid mu:uuid</li><li>[1] name mu:name</li>
 <li>[*] group auth:belongsToArtifactGroup</ul></td></tr>
 <tr><td>access token</td>
@@ -32,12 +32,47 @@ The authorization model constists of the following entities:
 <td>auth:accessToken</td>
 <td><ul><li>[1] uuid mu:uuid</li><li>[1] name mu:name</li><li>[1] description mu:description</li></ul></td></tr>
 <tr><td>grant</td>
-<td>A grant represents a link between on one hand one or more access tokens an on the other hand one or more authenticadables.</td>
+<td>A grant represents a link between on one hand one or more access tokens an on the other hand one or more authenticatables.</td>
 <td>auth:grant</td>
-<td><ul><li>[1] uuid mu:uuid</li><li>[*] accessToken auth:hasToken</li><li>[*] authenticadable auth:operatesOn</li></ul></td></tr>
+<td><ul><li>[1] uuid mu:uuid</li><li>[*] accessToken auth:hasToken</li><li>[*] authenticatable auth:operatesOn</li></ul></td></tr>
 </table>
 
 ## adding mu-authorization to a mu-semtech project
 ### data
 To work mu-authorization will expect certain basic triples to be present in the triple store. You can add/alter them manually or you can include the turtle file that you find in /data/toLoad/basic-access-tokens.ttl.
 This turtle file defines the 4 basic access tokens types (show, update, create, delete), a group of basic access tokens, a grant that allows show/update/create rights on that group and an administrator user group that has these rights. The administrator group itself is also an authenticdable but there are no rights defined on this group.
+
+### adding mu-authorization in a docker compose setup
+This is an example docker-compose.yml file that includes mu-authorization
+```
+identifier:
+  image: semtech/mu-identifier:1.0.0
+  ports:
+    - "80:80"
+  links:
+    - dispatcher:dispatcher
+dispatcher:
+  image: semtech/mu-dispatcher:1.0.1
+  volumes:
+    - ./config/dispatcher:/config
+  links:
+    - resource:resource
+database:
+  image: tenforce/virtuoso:virtuoso-v7.2.0-latest
+  environment:
+    SPARQL_UPDATE: "true"
+    DEFAULT_GRAPH: http://mu.semte.ch/application
+    DBA_PASSWORD: dba
+  ports:
+    - "8890:8890"
+  volumes:
+    - ./data/db:/var/lib/virtuoso/db
+resource:
+  image: semtech/mu-cl-resources:1.8.1
+  volumes:
+    - ./config/resources:/config
+  links:
+    - database:database
+  ports:
+    - 8080:80
+```
