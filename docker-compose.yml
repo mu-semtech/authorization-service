@@ -30,3 +30,4 @@ resource:
     - database:database
   ports:
     - 8080:80
+    - 4005:4005
