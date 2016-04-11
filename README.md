@@ -1,5 +1,5 @@
-# mu-authorization
-mu-authorization describes how and provides resources to include authorization in a custom mu-semtech project
+# authorization
+authorization describes how and provides resources to include authorization in a custom mu-semtech project
 
 ## the authorization model
 ### prefixes
@@ -37,12 +37,12 @@ The authorization model constists of the following entities:
 <td><ul><li>[1] uuid mu:uuid</li><li>[*] accessToken auth:hasToken</li><li>[*] authenticatable auth:operatesOn</li></ul></td></tr>
 </table>
 
-## adding mu-authorization to a mu-semtech project
+## adding authorization to a mu-semtech project
 ### data
-To work mu-authorization will expect certain basic triples to be present in the triple store. You can add/alter them manually or you can include the turtle file that you find in /data/toLoad/basic-access-tokens.ttl.
+To work authorization will expect certain basic triples to be present in the triple store. You can add/alter them manually or you can include the turtle file that you find in /data/toLoad/basic-access-tokens.ttl.
 This turtle file defines the 4 basic access tokens types (show, update, create, delete), a group of basic access tokens, a grant that allows show/update/create rights on that group and an administrator user group that has these rights. The administrator group itself is also an authenticdable but there are no rights defined on this group.
 
-### adding mu-authorization in a docker compose setup
+### adding authorization in a docker compose setup
 This is an example docker-compose.yml file that includes mu-authorization
 ```
 identifier:
