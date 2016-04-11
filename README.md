@@ -13,11 +13,11 @@ The authorization model constists of the following entities:
 <table>
 <tr><td>entity</td><td>short description</td><td>type</td><td>properties</br><ul><li>arity name predicate</li></ul></td></tr>
 <tr><td>user</td>
-<td>a user is a real person who will be using the system</td>
+<td>A user is a real person who will be using the system.</td>
 <td>foaf:Person</td>
 <td><ul><li>[1] uuid mu:uuid</li><li>[1] name foaf:name</li><li>[*] grant auth:hasRight</li></ul></td></tr>
 <tr><td>userGroup</td>
-<td>A user group can contain one or multiple users and one or multiple other user groups which do not contain it.</td>
+<td>A user group can contain none, one or multiple users and none, one or multiple other user groups which do not contain it.</td>
 <td>foaf:Group</td>
 <td><ul><li>[1] uuid mu:uuid</li><li>[1] name foaf:name</li>
 <li>[*] user inverse auth:belongsToAccessGroup</li>
