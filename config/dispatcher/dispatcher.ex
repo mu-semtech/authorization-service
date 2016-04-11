@@ -27,8 +27,8 @@ defmodule Dispatcher do
     Proxy.forward conn, path, "http://initDaemon/"
   end
 
-  match "/authenticadables/*path" do
-    Proxy.forward conn, path, "http://resource/authenticadables"
+  match "/authenticatables/*path" do
+    Proxy.forward conn, path, "http://resource/authenticatables"
   end
 
   match "/users/*path" do
