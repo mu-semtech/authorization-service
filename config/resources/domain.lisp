@@ -8,7 +8,7 @@
 (define-resource user ()
   :class (s-prefix "foaf:Person")
   :resource-base (s-url "http://mu.semte.ch/vocabularies/user/")
-  :properties `((:name :string ,(s-prefix "mu:name")))
+  :properties `((:name :string ,(s-prefix "foaf:name")))
   :has-many `((grant :via ,(s-prefix "auth:hasRight")
 			       :as "grants")
 	      )
@@ -19,10 +19,10 @@
 ;; a user-group can contain other user-groups
 ;;              can contain users
 ;;              has authorization types on objects
-(define-resource user-group ()
+(define-resource userGroup ()
   :class (s-prefix "foaf:Group")
   :resource-base (s-url "http://mu.semte.ch/vocabularies/group/")
-  :properties `((:name :string ,(s-prefix "mu:name")))
+  :properties `((:name :string ,(s-prefix "foaf:name")))
   :has-many `((user :via ,(s-prefix "auth:belongsToActorGroup")
 		    :inverse t
                     :as "users")
@@ -33,7 +33,7 @@
 			  :as "parent-groups")
 	      (grant :via ,(s-prefix "auth:hasRight")
 			       :as "grants"))
-  :on-path "user-groups")
+  :on-path "userGroups")
 
 ;; authenticatable
 ;; an authenticatable is something on which rights can be given to either users
@@ -42,7 +42,7 @@
 (define-resource authenticatable ()
   :class (s-prefix "auth:authenticatable")
   :resource-base (s-url "http://mu.semte.ch/vocabularies/authorization/authenticatable/")
-  :properties `((:name :string, (s-prefix "mu:name")))
+  :properties `((:title :string, (s-prefix "dc:title")))
   :on-path "authenticatables")
 
 ;; access-token
@@ -50,13 +50,13 @@
 ;; we assume there to be 4 basic access token types that should
 ;; be present to make mu-cl-resources handle the access token stuff
 ;; correctly (show, update, create, delete)
-(define-resource access-token ()
+(define-resource accessToken ()
   :class (s-prefix "auth:accessToken")
-  :resource-base (s-url "http://mu.semte.ch/vocabularies/authorization/access-token/")
-  :properties `((:name :string ,(s-prefix "mu:name"))
-		(:description :string ,(s-prefix "mu:description"))
+  :resource-base (s-url "http://mu.semte.ch/vocabularies/authorization/accessToken/")
+  :properties `((:title :string ,(s-prefix "dc:title"))
+		(:description :string ,(s-prefix "dc:description"))
 		)
-  :on-path "access-tokens")
+  :on-path "accessTokens")
 
 
 ;; grant
@@ -68,7 +68,7 @@
   :class (s-prefix "auth:grant")
   :resource-base (s-url "http:/mu.semte.ch/vocabularies/authoriation/grant/")
   :has-many `((access-token :via, (s-prefix "auth:hasToken")
-			    :as "access-tokens")
+			    :as "accessTokens")
 	      (authenticatable :via, (s-prefix "auth:operatesOn")
 				:as "authenticatables"))
   :on-path "grants")
