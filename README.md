@@ -6,7 +6,7 @@ authorization describes how and provides resources to include authorization in a
 auth: <http://mu.semte.ch/vocabularies/authorization/></br>
 foaf: <http://xmlns.com/foaf/0.1/></br>
 mu: <http://mu.semte.ch/vocabularies/core/></br>
-dc: <http://purl.org/dc/terms/>
+dcterms: <http://purl.org/dc/terms/>
 
 ### entities
 The authorization model constists of the following entities:
@@ -26,12 +26,12 @@ The authorization model constists of the following entities:
 <tr><td>authenticatable</td>
 <td>An authenticatable represents an object or a collection of objects on which a user can (himself or through rights granted by a group to which he belongs) have access rights. An authenticatable can belong to another authenticatable.</td>
 <td>auth:authenticatable</td>
-<td><ul><li>[1] uuid mu:uuid</li><li>[1] title dc:title</li>
+<td><ul><li>[1] uuid mu:uuid</li><li>[1] title dcterms:title</li>
 <li>[*] group auth:belongsToArtifactGroup</ul></td></tr>
 <tr><td>access token</td>
 <td>An access token represents an abstract type of authorization that can be granted to a user. There are 4 "standard" access tokens:<ul><li>create</li><li>delete</li><li>show</li><li>update</li></ul>. A microservice can offer support for different types of access tokens.</td>
 <td>auth:accessToken</td>
-<td><ul><li>[1] uuid mu:uuid</li><li>[1] title dc:title</li><li>[1] description dc:description</li></ul></td></tr>
+<td><ul><li>[1] uuid mu:uuid</li><li>[1] title dcterms:title</li><li>[1] description dcterms:description</li></ul></td></tr>
 <tr><td>grant</td>
 <td>A grant represents a link between on one hand one or more access tokens an on the other hand one or more authenticatables.</td>
 <td>auth:grant</td>
