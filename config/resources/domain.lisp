@@ -33,7 +33,7 @@
 			  :as "parent-groups")
 	      (grant :via ,(s-prefix "auth:hasRight")
 			       :as "grants"))
-  :on-path "userGroups")
+  :on-path "user-groups")
 
 ;; authenticatable
 ;; an authenticatable is something on which rights can be given to either users
@@ -56,7 +56,7 @@
   :properties `((:title :string ,(s-prefix "dc:title"))
 		(:description :string ,(s-prefix "dc:description"))
 		)
-  :on-path "accessTokens")
+  :on-path "access-tokens")
 
 
 ;; grant
