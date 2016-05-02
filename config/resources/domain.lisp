@@ -19,7 +19,7 @@
 ;; a user-group can contain other user-groups
 ;;              can contain users
 ;;              has authorization types on objects
-(define-resource userGroup ()
+(define-resource user-group ()
   :class (s-prefix "foaf:Group")
   :resource-base (s-url "http://mu.semte.ch/vocabularies/group/")
   :properties `((:name :string ,(s-prefix "foaf:name")))
@@ -50,7 +50,7 @@
 ;; we assume there to be 4 basic access token types that should
 ;; be present to make mu-cl-resources handle the access token stuff
 ;; correctly (show, update, create, delete)
-(define-resource accessToken ()
+(define-resource access-token ()
   :class (s-prefix "auth:accessToken")
   :resource-base (s-url "http://mu.semte.ch/vocabularies/authorization/accessToken/")
   :properties `((:title :string ,(s-prefix "dc:title"))
