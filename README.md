@@ -1,6 +1,39 @@
 # authorization
 authorization describes how and provides resources to include authorization in a custom mu-semtech project
 
+## Running the authorization microservice
+
+### Add it to a mu-semtech project
+
+To add authorization to a mu-semtech project you would need to do the following:
+<ul>
+<li>add the missing, if any, prefixes to repository.lisp</li>
+<li>make sure that all resources are added or augmented in your domain.lisp file</li>
+<li><optional> add the authorization model triples to your database, if you choose to use custom triples make sure that you understand the model completely</li>
+<li><optional>augment the basic authorization triples with specific triples for your application (ie perhaps you need extra tokens like approve or aggregate</li>
+<li><optional> the <a href="http://www.github.com/mu-semtech/ember-mu-authoriation">ember-mu-authorization addon</a> will provide your front end with a quick and customizable authorization management console</li>
+<li><optional> add a triple for each artifact on which authorization has to be enforced, this triple will be <artifact-id> a auth:artifact</li>
+</ul>
+
+### Run the authorization service as a microservice
+
+To run this authorization service as a modified mu-cl-resources please do:
+```
+docker run --name mu-authorization \
+       -p 80:80
+       --link database:database
+       -d flowofcontrol/mu-authorization-service
+```
+The basic authorization triples still have to be added to the triple store.
+
+## The authorization query
+
+The following sparql query will allow your microservice to test whether the currently active user has (a) token(s) on the passed artifact(s)(group).
+```
+display query here
+```
+
+
 ## the authorization model
 ### prefixes
 auth: <http://mu.semte.ch/vocabularies/authorization/></br>
