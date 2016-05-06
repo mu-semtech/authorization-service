@@ -14,6 +14,44 @@ To add authorization to a mu-semtech project you would need to do the following:
 <li><optional> the <a href="http://www.github.com/mu-semtech/ember-mu-authoriation">ember-mu-authorization addon</a> will provide your front end with a quick and customizable authorization management console</li>
 <li><optional> add a triple for each artifact on which authorization has to be enforced, this triple will be <artifact-id> a auth:artifact</li>
 </ul>
+### data
+To work authorization will expect certain basic triples to be present in the triple store. You can add/alter them manually or you can include the turtle file that you find in /data/toLoad/basic-access-tokens.ttl.
+This turtle file defines the 4 basic access tokens types (show, update, create, delete), a group of basic access tokens, a grant that allows show/update/create rights on that group and an administrator user group that has these rights. The administrator group itself is also an authenticdable but there are no rights defined on this group.
+
+### adding authorization in a docker compose setup
+This is an example docker-compose.yml file that includes mu-authorization
+```
+identifier:
+  image: semtech/mu-identifier:1.0.0
+  ports:
+    - "80:80"
+  links:
+    - dispatcher:dispatcher
+dispatcher:
+  image: semtech/mu-dispatcher:1.0.1
+  volumes:
+    - ./config/dispatcher:/config
+  links:
+    - resource:resource
+database:
+  image: tenforce/virtuoso:virtuoso-v7.2.0-latest
+  environment:
+    SPARQL_UPDATE: "true"
+    DEFAULT_GRAPH: http://mu.semte.ch/application
+    DBA_PASSWORD: dba
+  ports:
+    - "8890:8890"
+  volumes:
+    - ./data/db:/var/lib/virtuoso/db
+resource:
+  image: semtech/mu-cl-resources:1.8.1
+  volumes:
+    - ./config/resources:/config
+  links:
+    - database:database
+  ports:
+    - 8080:80
+```
 
 ### Run the authorization service as a microservice
 
@@ -70,43 +108,3 @@ The authorization model constists of the following entities:
 <td>auth:grant</td>
 <td><ul><li>[1] uuid mu:uuid</li><li>[*] accessToken auth:hasToken</li><li>[*] authenticatable auth:operatesOn</li></ul></td></tr>
 </table>
-
-## adding authorization to a mu-semtech project
-### data
-To work authorization will expect certain basic triples to be present in the triple store. You can add/alter them manually or you can include the turtle file that you find in /data/toLoad/basic-access-tokens.ttl.
-This turtle file defines the 4 basic access tokens types (show, update, create, delete), a group of basic access tokens, a grant that allows show/update/create rights on that group and an administrator user group that has these rights. The administrator group itself is also an authenticdable but there are no rights defined on this group.
-
-### adding authorization in a docker compose setup
-This is an example docker-compose.yml file that includes mu-authorization
-```
-identifier:
-  image: semtech/mu-identifier:1.0.0
-  ports:
-    - "80:80"
-  links:
-    - dispatcher:dispatcher
-dispatcher:
-  image: semtech/mu-dispatcher:1.0.1
-  volumes:
-    - ./config/dispatcher:/config
-  links:
-    - resource:resource
-database:
-  image: tenforce/virtuoso:virtuoso-v7.2.0-latest
-  environment:
-    SPARQL_UPDATE: "true"
-    DEFAULT_GRAPH: http://mu.semte.ch/application
-    DBA_PASSWORD: dba
-  ports:
-    - "8890:8890"
-  volumes:
-    - ./data/db:/var/lib/virtuoso/db
-resource:
-  image: semtech/mu-cl-resources:1.8.1
-  volumes:
-    - ./config/resources:/config
-  links:
-    - database:database
-  ports:
-    - 8080:80
-```
