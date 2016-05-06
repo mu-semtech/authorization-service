@@ -22,7 +22,7 @@ To run this authorization service as a modified mu-cl-resources please do:
 docker run --name mu-authorization \
        -p 80:80
        --link database:database
-       -d flowofcontrol/mu-authorization-service
+       -d flowofcontrol/authorization-service
 ```
 The basic authorization triples still have to be added to the triple store.
 
