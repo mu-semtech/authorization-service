@@ -7,7 +7,7 @@
 ;;        has access-tokens which give it rights to resources
 (define-resource user ()
   :class (s-prefix "foaf:Person")
-  :resource-base (s-url "http://mu.semte.ch/vocabularies/user/")
+  :resource-base (s-url "http://mu.semte.ch/services/authorization-service/user/")
   :properties `((:name :string ,(s-prefix "foaf:name")))
   :has-many `((grant :via ,(s-prefix "auth:hasRight")
 			       :as "grants")
@@ -21,7 +21,7 @@
 ;;              has authorization types on objects
 (define-resource user-group ()
   :class (s-prefix "foaf:Group")
-  :resource-base (s-url "http://mu.semte.ch/vocabularies/group/")
+  :resource-base (s-url "http://mu.semte.ch/services/authorization-service/group/")
   :properties `((:name :string ,(s-prefix "foaf:name")))
   :has-many `((user :via ,(s-prefix "auth:belongsToActorGroup")
 		    :inverse t
@@ -41,8 +41,8 @@
 
 (define-resource authenticatable ()
   :class (s-prefix "auth:authenticatable")
-  :resource-base (s-url "http://mu.semte.ch/vocabularies/authorization/authenticatable/")
-  :properties `((:title :string, (s-prefix "dc:title")))
+  :resource-base (s-url "http://mu.semte.ch/services/authorization-service/authenticatable/")
+  :properties `((:title :string, (s-prefix "dct:title")))
   :on-path "authenticatables")
 
 ;; access-token
@@ -52,9 +52,9 @@
 ;; correctly (show, update, create, delete)
 (define-resource access-token ()
   :class (s-prefix "auth:accessToken")
-  :resource-base (s-url "http://mu.semte.ch/vocabularies/authorization/accessToken/")
-  :properties `((:title :string ,(s-prefix "dc:title"))
-		(:description :string ,(s-prefix "dc:description"))
+  :resource-base (s-url "http://mu.semte.ch/services/authorization-service/accessToken/")
+  :properties `((:title :string ,(s-prefix "dct:title"))
+		(:description :string ,(s-prefix "dct:description"))
 		)
   :on-path "access-tokens")
 
@@ -66,7 +66,7 @@
 ;; to exactly 1 authenticatable
 (define-resource grant ()
   :class (s-prefix "auth:grant")
-  :resource-base (s-url "http:/mu.semte.ch/vocabularies/authoriation/grant/")
+  :resource-base (s-url "http://mu.semte.ch/services/authorization-service/grant/")
   :has-many `((access-token :via, (s-prefix "auth:hasToken")
 			    :as "accessTokens")
 	      (authenticatable :via, (s-prefix "auth:operatesOn")
