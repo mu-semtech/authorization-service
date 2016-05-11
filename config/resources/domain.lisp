@@ -68,7 +68,7 @@
   :class (s-prefix "auth:grant")
   :resource-base (s-url "http://mu.semte.ch/services/authorization-service/grant/")
   :has-many `((access-token :via, (s-prefix "auth:hasToken")
-			    :as "accessTokens")
+			    :as "access-tokens")
 	      (authenticatable :via, (s-prefix "auth:operatesOn")
 				:as "authenticatables"))
   :on-path "grants")
