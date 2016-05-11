@@ -35,12 +35,12 @@ defmodule Dispatcher do
     Proxy.forward conn, path, "http://resource/users/"
   end
 
-  match "/userGroups/*path" do
-    Proxy.forward conn, path, "http://resource/userGroups/"
+  match "/user-groups/*path" do
+    Proxy.forward conn, path, "http://resource/user-groups/"
   end
 
-  match "/accessTokens/*path" do
-    Proxy.forward conn, path, "http://resource/accessTokens/"
+  match "/access-tokens/*path" do
+    Proxy.forward conn, path, "http://resource/access-tokens/"
   end
 
   match "/grants/*path" do
