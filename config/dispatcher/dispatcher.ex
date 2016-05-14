@@ -15,20 +15,8 @@ defmodule Dispatcher do
   plug :match
   plug :dispatch
 
-  match "/pipelines/*path" do
-    Proxy.forward conn, path, "http://resource/pipelines/"
-  end
-
-  match "/steps/*path" do
-    Proxy.forward conn, path, "http://resource/steps/"
-  end
-
-  match "/init-daemon/*path" do
-    Proxy.forward conn, path, "http://initDaemon/"
-  end
-
   match "/authenticatables/*path" do
-    Proxy.forward conn, path, "http://resource/authenticatables"
+    Proxy.forward conn, path, "http://resource/authenticatables/"
   end
 
   match "/users/*path" do
