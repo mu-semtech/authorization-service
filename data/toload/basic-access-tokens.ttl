@@ -1,4 +1,4 @@
-1# copy this file to your data/toLoad folder
+# copy this file to your data/toLoad folder
 
 # this turtle file contains the basic access token definitions
 # that a mu-semtech project willing to utilize mu-authorization
@@ -18,48 +18,49 @@
 @prefix dct: <http://purl.org/dc/terms/> .
 
 # the collection of basic access tokens
-<http://mu.semte.ch/services/authorization-service/access-tokens> a auth:authenticatable;
+<http://mu.semte.ch/services/authorization-service/authenticatables/basic-access-tokens> a auth:Authenticatable;
 						       dct:title "basic access tokens";
 					 	       mu:uuid "5b787462-95ee-46fd-a841-4bc28dfa1c71".
 
 # show
-<http://mu.semte.ch/services/authorization-service/access-tokens/show> a auth:accessToken;
+<http://mu.semte.ch/services/authorization-service/access-tokens/show> a auth:AccessToken;
 					      		    mu:uuid "9bc6e689-a7d1-4c7e-90d2-ecb433aa3461";
 					      		    dct:title "show";
 					      		    dct:description "an entity that has access to this token will be able to request the triples connected to the authenticatables to which it grants access";
-					      		    auth:belongsToArtifactGroup <http://mu.semte.ch/services/authorization-service/access-tokens>.
+					      		    auth:belongsToArtifactGroup <http://mu.semte.ch/services/authorization-service/authenticatables/basic-access-tokens>.
 
 # update
-<http://mu.semte.ch/services/authorization-service/access-tokens/update> a auth:accessToken;
+<http://mu.semte.ch/services/authorization-service/access-tokens/update> a auth:AccessToken;
 							      mu:uuid "d631ee4a-29a3-419e-a441-f96126df173d";
 					        	      dct:title "update";
 					        	      dct:description "an entity that has access to this token will be able to update the authenticatable";
-							      auth:belongsToArtifactGroup <http://mu.semte.ch/services/authorization-service/access-tokens>.
+							      auth:belongsToArtifactGroup <http://mu.semte.ch/services/authorization-service/authenticatables/basic-access-tokens>.
 
 # create
-<http://mu.semte.ch/services/authorization-service/access-tokens/create> a auth:accessToken;
+<http://mu.semte.ch/services/authorization-service/access-tokens/create> a auth:AccessToken;
 							      mu:uuid "fd69b852-d35a-4ca6-9273-d584ab0ea5ff";
 							      dct:title "create";
 							      dct:description "an entity that has access to this token will be able to create types that are part of a group (this group has to be authenticatable as well";
-							      auth:belongsToArtifactGroup <http://mu.semte.ch/services/authorization-service/access-tokens>.
+							      auth:belongsToArtifactGroup <http://mu.semte.ch/services/authorization-service/authenticatables/basic-access-tokens>.
 
 # delete
-<http://mu.semte.ch/services/authorization-service/access-tokens/delete> a auth:accessToken;
+<http://mu.semte.ch/services/authorization-service/access-tokens/delete> a auth:AccessToken;
 							      mu:uuid "1a6e3aab-9ff8-4314-a8c1-d4f86799e695";
 							      dct:title "delete";
 							      dct:description "an entity that has access to this token can delete the authenticatable";
-							      auth:belongsToArtifactGroup <http://mu.semte.ch/services/authorization-service/access-tokens>.
+							      auth:belongsToArtifactGroup <http://mu.semte.ch/services/authorization-service/authenticatables/basic-access-tokens>.
 
-# this grant links the show/update/delete access to all basic access tokens
-<http://mu.semte.ch/services/authorization-service/access-tokens-grant> a auth:grant;
+# this grant links the create/show/update/delete access to all basic access tokens
+<http://mu.semte.ch/services/authorization-service/grants/basic-access-tokens> a auth:Grant;
 					       		     mu:uuid "1a1aa084-4052-44f6-bec6-308a9f9c4fa9";
+     					       		     auth:hasToken <http://mu.semte.ch/services/authorization-service/access-tokens/create>;
 					       		     auth:hasToken <http://mu.semte.ch/services/authorization-service/access-tokens/show>;
 					       		     auth:hasToken <http://mu.semte.ch/services/authorization-service/access-tokens/update>;
-					       		     auth:hasToken <http://mu.semte.ch/services/authorization-service/access-tokens/create>;
-					       		     auth:operatesOn <http://mu.semte.ch/services/authorization-service/access-tokens>.
+					       		     auth:hasToken <http://mu.semte.ch/services/authorization-service/access-tokens/delete>;
+					       		     auth:operatesOn <http://mu.semte.ch/services/authorization-service/authenticatables/basic-access-tokens>.
 
 # the administrator user group
 <http://mu.semte.ch/services/authorization-service/user-groups/admin> a foaf:Group;
 					       		     mu:uuid "9225c417-dfd4-48e3-9ab8-a27cc57e16b7";
 					       		     foaf:name "administrators group";
-					       		     auth:hasRight <http://mu.semte.ch/services/authorization-service/access-tokens-grant>.
+					       		     auth:hasRight <http://mu.semte.ch/services/authorization-service/grants/basic-access-tokens>.
