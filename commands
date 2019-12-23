@@ -1,0 +1,2 @@
+test1,docker run ubuntu echo "test 1 was executed",shows a line stating that test1 was executed
+test2,docker run ubuntu echo "test 2 was executed by $2",states that test 2 was executed takes a param denoting the caller

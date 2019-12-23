@@ -1,0 +1,5 @@
+image: semtech/mu-javascript-template:1.3.5
+links:
+  - db:database
+volumes:
+- "/tmp/tmp/test-js/:/app"
